@@ -1,0 +1,64 @@
+<!-- FILEPATH: /c:/Users/Hasan/Desktop/Final API/Final 3 API's/Gender API NEW/templates/index.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Website</title>
+    <style>
+      /* Sidebar styles */
+      .sidebar {
+        background-color: #333;
+        color: #fff;
+        height: 100%;
+        position: fixed;
+        width: 200px;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .sidebar li {
+        padding: 10px;
+      }
+
+      .sidebar li:hover {
+        background-color: #555;
+      }
+
+      /* Main content styles */
+      .content {
+        margin-left: 200px;
+        padding: 20px;
+        color: aliceblue;
+      }
+
+      /* Background styles */
+      body {
+        background-image: url('https://images.unsplash.com/photo-1521747116042-5a810fda9664');
+        background-size: absolute;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <ul>
+        <li>Image</li>
+        <li>Video</li>
+        <li>WebCam</li>
+      </ul>
+    </div>
+    <div class="content">
+      <h1>YOLO v8 Gender Detection API</h1>
+      <form method=post enctype=multipart/form-data name="form1">
+        <p>Upload Videos or images</p>
+        <input type="file" name="file" id="inputfile">
+        <br>
+        <button type="submit" name="button">Upload</button>
+      </form>
+    </div>
+  </body>
+</html>
