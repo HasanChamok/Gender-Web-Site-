@@ -38,7 +38,7 @@
       /* Background styles */
       body {
         background-image: url('https://images.unsplash.com/photo-1521747116042-5a810fda9664');
-        background-size: absolute;
+        background-size: auto;
         background-position: center;
       }
     </style>
@@ -55,9 +55,9 @@
       <h1>YOLO v8 Gender Detection API</h1>
       <form method=post enctype=multipart/form-data name="form1">
         <p>Upload Videos or images</p>
-        <input type="file" name="file" id="inputfile">
+        <input type="file" name="file" class="form-control-file" id="inputfile">
         <br>
-        <button type="submit" name="button">Upload</button>
+        <button type="submit">Upload</button>
       </form>
     </div>
   </body>

@@ -28,11 +28,6 @@ def index():
 Allowed_Image_Extenxion = ['jpg','jpeg','png']
 Allowed_Video_Extension = ['mp4','avi']
 
-# classes = []
-# result = {}
-# with open('classes.txt','r') as f:
-#     for line in f:
-#         classes.append(line.strip())
 
 @app.route("/",methods=["GET","POST"])
 def predict():
@@ -53,13 +48,13 @@ def predict():
                 # result = predict_image(f,filepath)
                 img = cv.imread(filepath)
                 frame = cv.imencode('.jpg',cv.UMat(img))[1].tobytes()
-                image = Image.open(io.BytesIO(frame))
+                # image = Image.open(io.BytesIO(frame))
                 #loading the model
                 yolo = YOLO('bestNew.pt')
                 #Opening the Image file
-                # file = Image.open(filepath)
+                file = Image.open(filepath)
                 #putting the result file in the result 
-                result = yolo.predict(image, save=True, conf=0.4, iou=0.7, project="runs/detect")
+                result = yolo.predict(file, save=True, conf=0.4, iou=0.7, project="runs/detect")
                 
                 return display(f.filename)
                 
@@ -75,7 +70,7 @@ def predict():
 
                 #Define codec and video writer Object
                 fourcc = cv.VideoWriter_fourcc(*'mp4v')
-                out = cv.VideoWriter('output.mp4', fourcc, 30, (frame_width, frame_height))
+                out = cv.VideoWriter('output1.mp4', fourcc, 30, (frame_width, frame_height))
                 # out = cv.VideoWriter(os.path.join(baesname, 'Detected_Videos', 'output.mp4'), fourcc, 30, (frame_width, frame_height))
                 yolo = YOLO('bestNew.pt') #Load the yolo model
 
@@ -108,81 +103,16 @@ def predict():
     latest_subfolder = max(subfolders, key=lambda x: os.path.getctime(os.path.join(folder_path,x)))
     image_path = folder_path + '/' + latest_subfolder + '/' + f.filename
     return render_template('index.html',image_path=image_path)
-            
-    
 
-# def predict_image(f,filepath):
-    
-#     basepath = os.path.dirname(__file__)
-#     #loading the model
-#     yolo = YOLO('bestNew.pt')
-#     #Opening the Image file
-#     file = Image.open(filepath)
-#     #putting the result file in the result 
-#     # result = yolo.predict(file)[0]
-#     result = yolo.predict(file, save=True, conf=0.4, iou=0.7)
-    
-#     return display(f.filename)
-#     # return jsonify({"File Path":"Successfull"})
-
-# def predict_video(f,filepath):
-#     baesname = os.path.dirname(__file__) #Getting the basename of the folder
-    
-#     cap = cv.VideoCapture(filepath) #capturing the video from the video filepath
-
-#     # Get video dimensions 
-#     frame_width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
-#     frame_height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
-
-#     #Define codec and video writer Object
-#     fourcc = cv.VideoWriter_fourcc(*'mp4v')
-#     out = cv.VideoWriter('output.mp4', fourcc, 30, (frame_width, frame_height))
-#     # out = cv.VideoWriter(os.path.join(baesname, 'Detected_Videos', 'output.mp4'), fourcc, 30, (frame_width, frame_height))
-#     yolo = YOLO('bestNew.pt') #Load the yolo model
-
-#     while True:
-#         ret, frame = cap.read()
-#         if not ret:
-#             break 
-#         #Do yolo detection on the frame here
-#         results = yolo.predict(frame, save=True)
-#         cv.waitKey(1)
-
-#         res_plotted = results[0].plot()
-#         cv.imshow('result', res_plotted)
-
-#         # Write the frame to the output video
-#         out.write(res_plotted)
-
-#         if cv.waitKey(1) == ord('q'):
-#             break
-
-#         return video_feed()
-
-#     folder_path = 'runs/detect'
-#     subfolders = [f for f in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path,f))]
-    
-#     # if not subfolders:
-#     #     return "No detection results found."
-    
-#     latest_subfolder = max(subfolders, key=lambda x: os.path.getctime(os.path.join(folder_path,x)))
-#     image_path = folder_path + '/' + latest_subfolder + '/' + f.filename
-#     return render_template('index.html',image_path=image_path)
 
 @app.route('/<path:filename>')                
 def display(filename):
     folder_path = 'runs/detect'
     subfolders = [f for f in os.listdir(folder_path) if os.path.isdir(os.path.join(folder_path,f))]
     
-    # if not subfolders:
-    #     return "No detection results found."
-    
     latest_subfolder = max(subfolders, key=lambda x: os.path.getctime(os.path.join(folder_path,x)))
     directory = folder_path + '/' + latest_subfolder
     files = os.listdir(directory)
-    
-    # if not files:
-    #     return "No files found in the detection results folder."
     
     latest_file = files[0]
     
@@ -199,7 +129,7 @@ def display(filename):
 
 def get_frame():
     folder_path = os.getcwd()
-    mp4files = 'output.mp4'
+    mp4files = 'output1.mp4'
     video = cv.VideoCapture(mp4files)
     while True:
         success,frame = video.read()
@@ -207,7 +137,7 @@ def get_frame():
             break
         ret, jpeg = cv.imencode('.jpg',frame)
         yield(b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n'+jpeg.tobytes()+b'\r\n\r\n')
-        time.sleep(0.1)
+        # time.sleep(0.1)
 
 @app.route('/video_feed')
 def video_feed():
