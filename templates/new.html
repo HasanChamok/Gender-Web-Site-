@@ -7,6 +7,7 @@
     <title>Beautiful Background and File Upload</title>
     <style>
         body {
+            position: relative;
             margin: 0;
             padding: 0;
             display: flex;
@@ -14,29 +15,51 @@
             align-items: center;
             height: 100vh;
             background: linear-gradient(to bottom, #3d4d54, #ADD8E6);
-            background-image: url('https://www.bhmpics.com/downloads/Dark-Sunset-Wallpaper-(30-+-Background-Pictures)/1.1320245.jpg');
+            background-image: url('https://images.pexels.com/photos/1722196/pexels-photo-1722196.jpeg?auto=compress&cs=tinysrgb&w=600');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
 
+        .wrapper {
+
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #00000030;
+        }
+
         .container {
+            position: absolute;
+
+            z-index: 20;
             text-align: center;
+            /* box-shadow: 4px */
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(to bottom, rgba(228, 223, 223, 0.8), rgba(111, 110, 110, 0.8)), url('https://www.bhmpics.com/downloads/Dark-Sunset-Wallpaper-(30-+-Background-Pictures)/1.1320245.jpg'); /* Gradient background with blur */
-            background-color: rgba(35, 235, 235, 0.8); /* Semi-transparent background color as fallback */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            /* background: linear-gradient(to bottom, red,#FFFFFF30), url('https://www.bhmpics.com/downloads/Dark-Sunset-Wallpaper-(30-+-Background-Pictures)/1.1320245.jpg'); Gradient background with blur */
+            background-color: #ffffff40;
+            /* Semi-transparent background color as fallback */
+            /* background-image: linear-gradient(180deg, #00ADEE50, #FFFFFF10); */
+
         }
 
         /* Fallback for browsers that don't support backdrop-filter */
         /* .no-backdrop-filter .container {
             background: url('https://www.bhmpics.com/downloads/Dark-Sunset-Wallpaper-(30-+-Background-Pictures)/1.1320245.jpg'); /* Use a semi-transparent PNG as a fallback } 
         */
-
-
+       
+        .file-upload{
+            cursor: pointer;
+            max-width: max-content;
+        }
         input[type="file"] {
             margin: 20px 0;
+           
         }
 
         img {
@@ -49,13 +72,23 @@
 
 <body>
     <div class="container">
+        <div class="wrapper"> </div>
+
+
         <h1>YOLO v8 Gender Detection</h1>
-      <form method=post enctype=multipart/form-data name="form1">
-        <h3>Upload Videos or images</h3>
-        <input type="file" name="file" class="form-control-file" id="inputfile">
-        <br>
-        <button type="submit">Upload</button>
-      </form>
+        <form method=post enctype=multipart/form-data name="form1">
+            <h3>Upload Videos or images</h3>
+            <label for="inputfile">
+                <!-- <img style="width: 40px ; height: 40px; cursor: pointer"
+                src="https://icons8.com/icon/1501/plus" /> -->
+                <svg style="width: 40px ; height: 40px; cursor: pointer" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
+                    <path d="M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 24 13 L 24 24 L 13 24 L 13 26 L 24 26 L 24 37 L 26 37 L 26 26 L 37 26 L 37 24 L 26 24 L 26 13 L 24 13 z"></path>
+                    </svg>
+            </label>
+            <input style="display: none;" type="file" name="file" class="file-upload" id="inputfile">
+            <br>
+            <button style="background-color: transparent; margin-top: 8px; cursor: pointer;" type="submit">Upload</button>
+        </form>
     </div>
 </body>
 
