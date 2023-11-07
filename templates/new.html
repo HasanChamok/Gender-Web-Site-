@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Background and File Upload</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #3d4d54, #ADD8E6);
+            background-image: url('https://www.bhmpics.com/downloads/Dark-Sunset-Wallpaper-(30-+-Background-Pictures)/1.1320245.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to bottom, rgba(228, 223, 223, 0.8), rgba(111, 110, 110, 0.8)), url('https://www.bhmpics.com/downloads/Dark-Sunset-Wallpaper-(30-+-Background-Pictures)/1.1320245.jpg'); /* Gradient background with blur */
+            background-color: rgba(35, 235, 235, 0.8); /* Semi-transparent background color as fallback */
+        }
+
+        /* Fallback for browsers that don't support backdrop-filter */
+        /* .no-backdrop-filter .container {
+            background: url('https://www.bhmpics.com/downloads/Dark-Sunset-Wallpaper-(30-+-Background-Pictures)/1.1320245.jpg'); /* Use a semi-transparent PNG as a fallback } 
+        */
+
+
+        input[type="file"] {
+            margin: 20px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>YOLO v8 Gender Detection</h1>
+      <form method=post enctype=multipart/form-data name="form1">
+        <h3>Upload Videos or images</h3>
+        <input type="file" name="file" class="form-control-file" id="inputfile">
+        <br>
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+</body>
+
+</html>

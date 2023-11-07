@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('new.html')
 
 Allowed_Image_Extenxion = ['jpg','jpeg','png']
 Allowed_Video_Extension = ['mp4','avi']
@@ -72,6 +72,8 @@ def predict():
                 fourcc = cv.VideoWriter_fourcc(*'mp4v')
                 out = cv.VideoWriter('output1.mp4', fourcc, 30, (frame_width, frame_height))
                 # out = cv.VideoWriter(os.path.join(baesname, 'Detected_Videos', 'output.mp4'), fourcc, 30, (frame_width, frame_height))
+                # Get video dimensions from the first frame
+
                 yolo = YOLO('bestNew.pt') #Load the yolo model
 
                 while cap.isOpened():
@@ -88,7 +90,7 @@ def predict():
 
                     # Write the frame to the output video
                     out.write(res_plotted)
-
+                    
                     if cv.waitKey(1) == ord('q'):
                         break
 
@@ -102,7 +104,7 @@ def predict():
     
     latest_subfolder = max(subfolders, key=lambda x: os.path.getctime(os.path.join(folder_path,x)))
     image_path = folder_path + '/' + latest_subfolder + '/' + f.filename
-    return render_template('index.html',image_path=image_path)
+    return render_template('new.html',image_path=image_path)
 
 
 @app.route('/<path:filename>')                
