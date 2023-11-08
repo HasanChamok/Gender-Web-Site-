@@ -69,6 +69,14 @@
             border-radius: 10px;
         }
     </style>
+
+    <script>
+        function displayFileName() {
+            var input = document.getElementById('inputfile');
+            var fileNameDisplay = document.getElementById('file-name-display');
+            fileNameDisplay.textContent = input.files[0].name;
+        }
+    </script>
 </head>
 
 <body>
@@ -89,7 +97,16 @@
                     </path>
                 </svg>
             </label>
-            <input style="display: none;" type="file" name="file" class="file-upload" id="inputfile">
+            <!-- <input style="display: none;" type="file" name="file" class="file-upload" id="inputfile">
+            <br>
+            <div id="file-name-display"></div>
+            <br>
+            <button style="background-color: transparent; margin-top: 8px; cursor: pointer;"
+                type="submit">Upload</button> -->
+            <input style="display: none;" type="file" name="file" class="file-upload" id="inputfile"
+                onchange="displayFileName()">
+            <br>
+            <div id="file-name-display"></div>
             <br>
             <button style="background-color: transparent; margin-top: 8px; cursor: pointer;"
                 type="submit">Upload</button>
